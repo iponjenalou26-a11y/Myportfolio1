@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <title>Jenalou T. Ipon | Professional Portfolio</title>
+    <style>
+        :root {
+            --primary-color: #a61e62;
+            --secondary-color: #e7549b;
+            --accent-color: #ffb8d8;
+            --text-dark: #49283a;
+            --text-light: #ffffff;
+            --bg-light: #fff5fa;
+            --bg-white: #ffffff;
+            --card-shadow: 0 16px 40px rgba(166, 30, 98, .10);
+            --header-height: 72px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-light); color: var(--text-dark); line-height: 1.7;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: ""; position: fixed; inset: 0; pointer-events: none; z-index: -1;
+            background: radial-gradient(circle at 10% 20%, rgba(255,182,213,.24), transparent 28%),
+                        radial-gradient(circle at 90% 80%, rgba(231,84,155,.12), transparent 25%);
+        }
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; height: var(--header-height);
+            background: rgba(166, 30, 98, .92); backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px); z-index: 1000; display: flex; align-items: center;
+            box-shadow: 0 5px 25px rgba(105, 20, 63, .18);
+            border-bottom: 1px solid rgba(255,255,255,.18);
+        }
+        .navbar {
+            display: flex; justify-content: space-between; align-items: center; max-width: 1200px;
+            width: 100%; margin: 0 auto; padding: 0 2rem; gap: 1rem;
+        }
+        .logo { color: var(--text-light); font-size: 1.45rem; font-weight: 800; letter-spacing: .3px; }
+        .logo span { color: #ffd3e7; }
+        .nav-links { display: flex; list-style: none; gap: .35rem; }
+        .nav-links li { margin-left: .2rem; }
+        .nav-links a {
+            display: inline-block; color: var(--text-light); text-decoration: none; font-size: .93rem;
+            font-weight: 600; padding: .55rem .8rem; border-radius: 999px; transition: .25s ease;
+        }
+        .nav-links a:hover, .nav-links a:focus-visible {
+            color: var(--primary-color); background: #ffe2ef; transform: translateY(-2px);
+        }
+        section { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; scroll-margin-top: var(--header-height); }
+        .section-title {
+            text-align: center; font-size: clamp(1.8rem, 4vw, 2.45rem); color: var(--primary-color);
+            margin-bottom: 2.2rem; letter-spacing: -.5px;
+        }
+        .section-title::after {
+            content: ""; display: block; width: 68px; height: 4px; border-radius: 9px;
+            background: linear-gradient(90deg, #f48ab9, #a61e62); margin: .75rem auto 0;
+        }
+        #home {
+            position: relative; isolation: isolate; display: flex; flex-direction: column; align-items: center;
+            justify-content: center; text-align: center; min-height: 100vh; max-width: 100%;
+            padding: calc(var(--header-height) + 3rem) 2rem 4rem; scroll-margin-top: 0;
+            color: var(--text-light); overflow: hidden;
+            background: linear-gradient(135deg, #8f174f 0%, #d63384 48%, #f58ab8 100%);
+        }
+        #home::before, #home::after {
+            content: ""; position: absolute; z-index: -1; border-radius: 50%; pointer-events: none;
+            animation: floatBlob 9s ease-in-out infinite;
+        }
+        #home::before {
+            width: 340px; height: 340px; top: -100px; left: -90px;
+            border: 1px solid rgba(255,255,255,.3); box-shadow: 0 0 0 28px rgba(255,255,255,.045), 0 0 0 58px rgba(255,255,255,.035);
+        }
+        #home::after {
+            width: 280px; height: 280px; bottom: -110px; right: -65px; background: rgba(255,220,236,.12);
+            animation-delay: -4s;
+        }
+        .sparkle {
+            position: absolute; color: rgba(255,255,255,.9); pointer-events: none;
+            animation: twinkle 2.8s ease-in-out infinite; font-size: 1.2rem;
+        }
+        .sparkle:nth-of-type(1) { top: 20%; left: 15%; }
+        .sparkle:nth-of-type(2) { top: 28%; right: 17%; animation-delay: .8s; }
+        .sparkle:nth-of-type(3) { bottom: 22%; left: 22%; animation-delay: 1.3s; }
+        .sparkle:nth-of-type(4) { bottom: 18%; right: 20%; animation-delay: .4s; }
+        .profile-placeholder {
+            width: 168px; height: 168px; border-radius: 50%; background: linear-gradient(145deg, #ffe1ef, #ff9ec9);
+            color: var(--primary-color); display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: .9rem; text-align: center; padding: 1rem; margin-bottom: 1.5rem;
+            border: 5px solid rgba(255,255,255,.9); outline: 2px solid rgba(255,255,255,.35);
+            box-shadow: 0 0 0 12px rgba(255,255,255,.1), 0 18px 45px rgba(83, 7, 43, .25);
+            animation: riseIn .8s ease both, softPulse 4s ease-in-out 1s infinite;
+        }
+        #home h1 { font-size: clamp(2rem, 6vw, 3.6rem); letter-spacing: 1.5px; line-height: 1.15; text-shadow: 0 5px 20px rgba(88,10,48,.18); }
+        #home > p { max-width: 700px; }
+        #home > p:nth-of-type(1) { color: #ffe2ef !important; font-size: clamp(1rem, 2.5vw, 1.25rem) !important; font-weight: 700; }
+        #home > p:nth-of-type(2) { font-size: 1.02rem !important; line-height: 1.9; }
+        .about-content, .skills-container, .projects-grid, .edu-container {
+            background: rgba(255,255,255,.92); padding: clamp(1.3rem, 4vw, 2.3rem); border-radius: 22px;
+            margin-bottom: 2rem; box-shadow: var(--card-shadow); border: 1px solid #ffe0ed;
+        }
+        .about-content, .skills-container, .projects-grid { transition: transform .3s ease, box-shadow .3s ease; }
+        .about-content:hover, .skills-container:hover, .projects-grid:hover {
+            box-shadow: 0 22px 48px rgba(166,30,98,.14);
+        }
+        .interests-grid { display: flex; gap: .65rem; flex-wrap: wrap; margin-top: 1rem; margin-bottom: 1.5rem; }
+        .interest-item {
+            background: #fff0f7; border: 1px solid #ffd0e4; color: #9c245e;
+            padding: .55rem 1rem; border-radius: 999px; font-size: .92rem; font-weight: 600;
+            transition: .25s ease;
+        }
+        .interest-item:hover { background: #d63384; color: white; transform: translateY(-3px); }
+        .edu-list { list-style: none; margin-top: 1rem; }
+        .edu-list li {
+            margin-bottom: 1.2rem; padding: .25rem 0 .25rem 1.2rem;
+            border-left: 3px solid #e7549b; position: relative;
+        }
+        .edu-list li::before { content: "✿"; position: absolute; left: -10px; top: 0; color: #d63384; background: white; font-size: .8rem; }
+        .edu-year { font-size: .88rem; color: #b03a73; font-weight: 800; }
+        .skill-tags { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 1.2rem; }
+        .skill-tag {
+            background: linear-gradient(135deg, #a61e62, #e7549b); color: var(--text-light);
+            padding: .65rem 1rem; border-radius: 12px; font-size: .94rem; font-weight: 600;
+            box-shadow: 0 6px 14px rgba(166,30,98,.15); transition: transform .25s ease, box-shadow .25s ease;
+        }
+        .skill-tag:hover { transform: translateY(-4px); box-shadow: 0 10px 22px rgba(166,30,98,.22); }
+        .achievement-item {
+            padding: 1.5rem; background: linear-gradient(135deg, #fffafd, #fff0f7);
+            border: 1px solid #ffd6e8; border-radius: 18px; margin-bottom: 1rem;
+        }
+        .achievement-item h3 { color: var(--primary-color) !important; }
+        .achievement-tag {
+            display: inline-block; margin-top: .9rem; color: #9c245e; background: #ffe0ee;
+            padding: .45rem .8rem; border-radius: 10px; font-size: .88rem;
+        }
+        #achievements [style*="dashed"] { background: #fff6fb !important; border-color: #eaa1c3 !important; color: #a64a78 !important; border-radius: 14px !important; }
+        #contact .about-content { border-top: 4px solid #e7549b; }
+        #contact a { color: #c02675 !important; overflow-wrap: anywhere; }
+        #contact a:hover { text-decoration: underline !important; }
+        @keyframes twinkle { 0%,100% { opacity: .35; transform: scale(.8) rotate(0); } 50% { opacity: 1; transform: scale(1.25) rotate(18deg); } }
+        @keyframes floatBlob { 0%,100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-18px) rotate(8deg); } }
+        @keyframes riseIn { from { opacity: 0; transform: translateY(18px) scale(.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        @keyframes softPulse { 0%,100% { box-shadow: 0 0 0 12px rgba(255,255,255,.1), 0 18px 45px rgba(83,7,43,.25); } 50% { box-shadow: 0 0 0 17px rgba(255,255,255,.07), 0 18px 45px rgba(83,7,43,.2); } }
+        @media (max-width: 760px) {
+            :root { --header-height: 104px; }
+            .navbar { flex-direction: column; justify-content: center; gap: .15rem; padding: .55rem 1rem; }
+            .logo { font-size: 1.2rem; }
+            .nav-links { justify-content: center; flex-wrap: wrap; gap: .05rem; }
+            .nav-links li { margin: 0; }
+            .nav-links a { font-size: .8rem; padding: .35rem .55rem; }
+            section { padding: 3.5rem 1rem; }
+            #home { padding-left: 1.2rem; padding-right: 1.2rem; }
+            .profile-placeholder { width: 145px; height: 145px; }
+            .about-content, .skills-container, .projects-grid { padding: 1.25rem; }
+            .sparkle:nth-of-type(1) { left: 7%; } .sparkle:nth-of-type(2) { right: 8%; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+        }
+
+        /* Typography refresh: elegant headings + clean, modern body text */
+        * { font-family: 'DM Sans', 'Segoe UI', Tahoma, sans-serif; }
+        h1, h2, h3, .logo {
+            font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+        }
+        #home h1 {
+            font-weight: 800;
+            letter-spacing: 1.2px;
+            line-height: 1.12;
+            text-wrap: balance;
+        }
+        .section-title {
+            font-weight: 700;
+            letter-spacing: -.6px;
+            text-wrap: balance;
+        }
+        h3 {
+            font-weight: 700;
+            letter-spacing: -.2px;
+            line-height: 1.35;
+        }
+        p, li, .skill-tag, .interest-item, .nav-links a {
+            letter-spacing: .08px;
+        }
+        .logo {
+            letter-spacing: .2px;
+            font-weight: 700;
+        }
+        .about-content > p, .achievement-item > p {
+            line-height: 1.85;
+        }
+        .nav-links a { font-weight: 700; }
+        .profile-placeholder {
+            font-family: 'DM Sans', sans-serif;
+            letter-spacing: .5px;
+            text-transform: uppercase;
+        }
+        @media (max-width: 760px) {
+            #home h1 { letter-spacing: .5px; }
+            .section-title { letter-spacing: -.3px; }
+        }
+
+
+        /* Rising pink flower accents — intentionally excluded from the Home section */
+        #about, #skills, #achievements, #contact { position: relative; isolation: isolate; }\n        #about > :not(.flower-field), #skills > :not(.flower-field), #achievements > :not(.flower-field), #contact > :not(.flower-field) { position: relative; }
+        .flower-field {
+            position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: -1;
+        }
+        .flower-field span {
+            position: absolute; bottom: -48px; left: var(--x);
+            color: #f28ab9; opacity: 0; font-size: var(--size, 1.3rem);
+            text-shadow: 0 0 12px rgba(255, 143, 194, .45);
+            animation: flowerRise var(--duration, 10s) linear infinite;
+            animation-delay: var(--delay, 0s);
+        }
+        .flower-field span:nth-child(2n) { color: #e7549b; }
+        .flower-field span:nth-child(3n) { color: #ffc0dc; }
+        @keyframes flowerRise {
+            0% { transform: translate3d(0, 0, 0) rotate(0deg) scale(.7); opacity: 0; }
+            12% { opacity: .65; }
+            75% { opacity: .45; }
+            100% { transform: translate3d(var(--drift, 28px), -115vh, 0) rotate(300deg) scale(1.15); opacity: 0; }
+        }
+        .profile-placeholder { overflow: hidden; padding: 0; }
+        .profile-placeholder img {
+            display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 28%;
+            border-radius: 50%;
+        }
+        .certificate-frame {
+            margin-top: 1.5rem; max-width: 760px; padding: .7rem;
+            background: linear-gradient(135deg, #fff, #fff0f7);
+            border: 1px solid #ffd0e4; border-radius: 16px;
+            box-shadow: 0 12px 28px rgba(166,30,98,.12);
+        }
+        .certificate-frame img {
+            display: block; width: 100%; height: auto; border-radius: 9px;
+        }
+        .certificate-caption {
+            padding: .65rem .3rem .15rem; text-align: center;
+            color: #9c245e; font-size: .88rem; font-weight: 600;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .flower-field span { animation: none; display: none; }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">Jenalou<span>.</span></div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#achievements">Achievements</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home">
+        <span class="sparkle" aria-hidden="true">✦</span><span class="sparkle" aria-hidden="true">✧</span><span class="sparkle" aria-hidden="true">✦</span><span class="sparkle" aria-hidden="true">✧</span>
+        <div class="profile-placeholder"><img src="c:\Users\admin\Downloads\profile.html" alt="Jenalou T. Ipon professional profile photo"></div>
+        <h1>JENALOU T. IPON</h1>
+        <p style="color: var(--accent-color); font-size: 1.2rem; margin: 0.5rem 0 1.5rem 0;">BSBA Student | Aspiring Business Professional</p>
+        <p style="max-width: 600px; font-size: 1rem; opacity: 0.9;">Hello! Welcome to My Portfolio! I am Jenalou T. Ipon, a passionate and motivated BSBA student who is eager to learn, grow, and explore new opportunities. This portfolio showcases my personal background, skills, talents, and academic journey as I continue to develop myself and prepare for my future career.</p>
+    </section>
+
+    <section id="about">
+        <div class="flower-field" aria-hidden="true">
+            <span style="--x:7%;--size:1.2rem;--duration:12s;--delay:-2s;--drift:24px">✿</span>
+            <span style="--x:21%;--size:1.5rem;--duration:14s;--delay:-8s;--drift:-32px">✿</span>
+            <span style="--x:37%;--size:1rem;--duration:11s;--delay:-5s;--drift:38px">✿</span>
+            <span style="--x:54%;--size:1.4rem;--duration:13s;--delay:-10s;--drift:-25px">✿</span>
+            <span style="--x:72%;--size:1.1rem;--duration:15s;--delay:-4s;--drift:30px">✿</span>
+            <span style="--x:89%;--size:1.6rem;--duration:12s;--delay:-7s;--drift:-34px">✿</span>
+        </div>
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+            <p>I am Jenalou T. Ipon, a third-year Bachelor of Science in Business Administration student at Dr. Aurelio Mendoza Memorial Colleges in Zamboanga Sibugay. I am a hardworking, responsible, and motivated individual who is always willing to learn new things and explore different opportunities.</p>
+            <p style="margin-top: 1rem;">I have skills in leadership, management, creativity, critical thinking, and problem-solving. I enjoy working with others, sharing ideas, and taking on new challenges. I believe that every experience is an opportunity to learn and improve. My goal is to continue developing my knowledge and abilities, build my confidence, and become a successful business professional in the future.</p>
+            
+            <h3 style="margin-top: 2rem; color: var(--primary-color);">Educational Background</h3>
+            <ul class="edu-list">
+                <li>
+                    <div class="edu-year">2024 – 2027</div>
+                    <strong>College: Dr. Aurelio Mendoza Memorial Colleges</strong>
+                    <p>Bachelor of Science in Business Administration</p>
+                </li>
+                <li>
+                    <div class="edu-year">2022 – 2024</div>
+                    <strong>Senior High School: Dr. Aurelio Mendoza Memorial Colleges</strong>
+                </li>
+                <li>
+                    <div class="edu-year">2018 – 2022</div>
+                    <strong>Junior High School: Ipil National High School</strong>
+                </li>
+                <li>
+                    <div class="edu-year">2012 – 2017</div>
+                    <strong>Elementary: Sanito Elementary School</strong>
+                </li>
+            </ul>
+
+            <h3 style="margin-top: 2rem; color: var(--primary-color);">Interests & Hobbies</h3>
+            <div class="interests-grid">
+                <div class="interest-item">Dancing</div>
+                <div class="interest-item">Art</div>
+                <div class="interest-item">Hiking</div>
+                <div class="interest-item">Watching Movies</div>
+                <div class="interest-item">Journaling</div>
+                <div class="interest-item">Sewing</div>
+            </div>
+
+            <h3 style="margin-top: 1.5rem; color: var(--primary-color);">Personal Goals and Aspirations</h3>
+            <p style="margin-top: 0.5rem;">My personal goal is to successfully graduate with a Bachelor of Science in Business Administration and build a successful career in the banking industry. I want to gain valuable knowledge and experience, improve my skills, and become financially independent. In the future, I also aspire to establish and manage my own business. I believe that through hard work, determination, and continuous learning, I can achieve my dreams and build a better future for myself and my family.</p>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="flower-field" aria-hidden="true">
+            <span style="--x:7%;--size:1.2rem;--duration:12s;--delay:-2s;--drift:24px">✿</span>
+            <span style="--x:21%;--size:1.5rem;--duration:14s;--delay:-8s;--drift:-32px">✿</span>
+            <span style="--x:37%;--size:1rem;--duration:11s;--delay:-5s;--drift:38px">✿</span>
+            <span style="--x:54%;--size:1.4rem;--duration:13s;--delay:-10s;--drift:-25px">✿</span>
+            <span style="--x:72%;--size:1.1rem;--duration:15s;--delay:-4s;--drift:30px">✿</span>
+            <span style="--x:89%;--size:1.6rem;--duration:12s;--delay:-7s;--drift:-34px">✿</span>
+        </div>
+        <h2 class="section-title">My Skills</h2>
+        <div class="skills-container">
+            <p>I have built a solid foundation of professional and technical capabilities throughout my academic journey:</p>
+            <div class="skill-tags">
+                <div class="skill-tag">Management Skills</div>
+                <div class="skill-tag">Leadership</div>
+                <div class="skill-tag">Critical Thinking</div>
+                <div class="skill-tag">Problem-Solving</div>
+                <div class="skill-tag">Creativity</div>
+                <div class="skill-tag">Technical Skills (Microsoft Word & Excel)</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="achievements">
+        <div class="flower-field" aria-hidden="true">
+            <span style="--x:7%;--size:1.2rem;--duration:12s;--delay:-2s;--drift:24px">✿</span>
+            <span style="--x:21%;--size:1.5rem;--duration:14s;--delay:-8s;--drift:-32px">✿</span>
+            <span style="--x:37%;--size:1rem;--duration:11s;--delay:-5s;--drift:38px">✿</span>
+            <span style="--x:54%;--size:1.4rem;--duration:13s;--delay:-10s;--drift:-25px">✿</span>
+            <span style="--x:72%;--size:1.1rem;--duration:15s;--delay:-4s;--drift:30px">✿</span>
+            <span style="--x:89%;--size:1.6rem;--duration:12s;--delay:-7s;--drift:-34px">✿</span>
+        </div>
+    <h2 class="section-title">Achievements & Milestones</h2>
+    <div class="projects-grid">
+        <div class="achievement-item">
+            <h3 style="color: var(--primary-color);">Certificate of Completion: Computer Literacy Enhancement and Development Program</h3>
+            <p style="margin-top: 0.5rem;">Successfully finished 28 hours of comprehensive modular training covering Basic Computer Concepts and essential Microsoft Office Applications (Microsoft Word, Microsoft Excel, Microsoft PowerPoint, and Microsoft Publisher), alongside Adobe Photoshop.</p>
+            <div class="achievement-tag">Issued by Multi-Advance Program Services & Marian College, Inc. — August 18, 2018</div>
+            
+            <div class="certificate-frame">
+                <img src="c:\Users\admin\Downloads\certidicate.html" alt="Certificate of Completion for the Computer Literacy Enhancement and Development Program">
+                <p class="certificate-caption">Computer Literacy Enhancement and Development Program · August 18, 2018</p>
+            </div>
+        </div>
+
+        <div class="achievement-item" style="margin-top: 2rem;">
+            <h3 style="color: var(--primary-color);">Academic Progression Milestone</h3>
+            <p style="margin-top: 0.5rem;">Successfully advanced into the 3rd year of the Bachelor of Science in Business Administration program with consistent performance at Dr. Aurelio Mendoza Memorial Colleges.</p>
+        </div>
+    </div>
+</section>
+       <section id="contact" style="text-align: center;">
+        <div class="flower-field" aria-hidden="true">
+            <span style="--x:7%;--size:1.2rem;--duration:12s;--delay:-2s;--drift:24px">✿</span>
+            <span style="--x:21%;--size:1.5rem;--duration:14s;--delay:-8s;--drift:-32px">✿</span>
+            <span style="--x:37%;--size:1rem;--duration:11s;--delay:-5s;--drift:38px">✿</span>
+            <span style="--x:54%;--size:1.4rem;--duration:13s;--delay:-10s;--drift:-25px">✿</span>
+            <span style="--x:72%;--size:1.1rem;--duration:15s;--delay:-4s;--drift:30px">✿</span>
+            <span style="--x:89%;--size:1.6rem;--duration:12s;--delay:-7s;--drift:-34px">✿</span>
+        </div>
+    <h2 class="section-title">Contact Me</h2>
+    <div class="about-content" style="max-width: 600px; margin: 0 auto; text-align: left;">
+        <p><strong>Email:</strong> <a href="mailto:iponjenalou26@gmail.com" style="color: var(--secondary-color); text-decoration: none;">iponjenalou26@gmail.com</a></p>
+        <p style="margin-top: 0.5rem;"><strong>Facebook:</strong> <a href="https://facebook.com" target="_blank" style="color: var(--secondary-color); text-decoration: none;">Jenalou Tejamo Ipon</a></p>
+        <p style="margin-top: 0.5rem;"><strong>Address:</strong> Sanito, Purok Greenfield, Ipil, Zamboanga Sibugay</p>
+    </div>
+</section>
+
+
+
+
+
+</body>
+</html>
+
+
+
+</body>
+</html>
